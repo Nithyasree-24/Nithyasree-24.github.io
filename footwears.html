@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footwear - Prasanna's Fashions</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url('footwears background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: black;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        header {
+            margin-bottom: 30px;
+        }
+        .back-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background-color: white;
+            color: black;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1em;
+            border: 2px solid black; /* Border to match the theme */
+        }
+
+        .back-btn:hover {
+            opacity: 0.9;
+            background-color: #f2f2f2; /* Lighter gray on hover */
+        }
+        .shirt-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .shirt {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            width: 220px; /* Fixed width for consistency */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .shirt:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .shirt img {
+            width: 100%;
+            height: 200px; /* Fixed height for consistency */
+            object-fit: cover; /* Ensures image covers the area without distortion */
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .shirt img:hover {
+            transform: scale(1.1);
+        }
+
+        .shirt h2 {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .shirt p {
+            font-size: 16px;
+            color: #333;
+        }
+
+        .shirt button {
+            background-color: #1e90ff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .shirt button:hover {
+            background-color: #4682b4;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Footwear Collection</h1>
+        <a href="fashion 14.html" class="back-btn">Back</a>
+        <p>Explore our range of Footwear collections</p>
+    </header>
+
+    <div class="shirt-container">
+        <div class="shirt">
+            <img src="men 1.jpg" alt="Black Formals">
+            <h2>Black formals</h2>
+            <p>₹1,200</p>
+            <button onclick="addToCart('Black formals', 'men 1.jpg', 1200)">Add to Cart</button>
+            <button onclick="addToWishlist('Black formals', 'men 1.jpg', 1200)">Add to Wishlist</button>
+        </div>
+        <div class="shirt">
+            <img src="men 2.jpg" alt="Brown Formals">
+            <h2>Brown formals</h2>
+            <p>₹1,500</p>
+            <button onclick="addToCart('Brown formals', 'men 2.jpg', 1500)">Add to Cart</button>
+            <button onclick="addToWishlist('Brown formals', 'men 2.jpg', 1500)">Add to Wishlist</button>
+        </div>
+        <div class="shirt">
+            <img src="men 3.jpg" alt="White Formals">
+            <h2>White formals</h2>
+            <p>₹1,800</p>
+            <button onclick="addToCart('White formals', 'men 3.jpg', 1800)">Add to Cart</button>
+            <button onclick="addToWishlist('White formals', 'men 3.jpg', 1800)">Add to Wishlist</button>
+        </div>
+        <div class="shirt">
+            <img src="men 4.jpg" alt="Ivory Sneakers">
+            <h2>Ivory sneakers</h2>
+            <p>₹1,100</p>
+            <button onclick="addToCart('Ivory sneakers', 'men 4.jpg', 1100)">Add to Cart</button>
+            <button onclick="addToWishlist('Ivory sneakers', 'men 4.jpg', 1100)">Add to Wishlist</button>
+        </div>
+        <div class="shirt">
+            <img src="men 5.jpg" alt="White Sneakers">
+            <h2>White sneakers</h2>
+            <p>₹1,400</p>
+            <button onclick="addToCart('White sneakers', 'men 5.jpg', 1400)">Add to Cart</button>
+            <button onclick="addToWishlist('White sneakers', 'men 5.jpg', 1400)">Add to Wishlist</button>
+        </div>
+        <div class="shirt">
+            <img src="men 6.jpg" alt="Colorblocked Sneakers">
+            <h2>Colorblocked sneakers</h2>
+            <p>₹1,600</p>
+            <button onclick="addToCart('Colorblocked sneakers', 'men 6.jpg', 1600)">Add to Cart</button>
+            <button onclick="addToWishlist('Colorblocked sneakers', 'men 6.jpg', 1600)">Add to Wishlist</button>
+        </div>
+    </div>
+
+    <script>
+        function addToCart(name, image, price) {
+            let cart = localStorage.getItem('cart');
+            cart = cart ? JSON.parse(cart) : [];
+
+            const existingItem = cart.find(item => item.name === name);
+
+            if (existingItem) {
+                existingItem.quantity++; // Increment quantity if item already in cart
+            } else {
+                cart.push({ name, image, price, quantity: 1 });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(name + " has been added to your cart.");
+
+         
+        }
+
+        function addToWishlist(name, image, price) {
+            let wishlist = localStorage.getItem('wishlist');
+            wishlist = wishlist ? JSON.parse(wishlist) : [];
+
+            const existingItem = wishlist.find(item => item.name === name);
+
+            if (!existingItem) {
+                wishlist.push({ name, image, price });
+                localStorage.setItem('wishlist', JSON.stringify(wishlist));
+                alert(name + " is added to your wishlist.");
+
+            } else {
+                alert(name + ' is already in your wishlist.');
+            }
+        }
+    </script>
+</body>
+</html>

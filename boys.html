@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boys Collection - Prasanna's Fashions</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url('boys background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: black;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        header {
+            margin-bottom: 30px;
+        }
+        .back-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background-color: white;
+            color: blue;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1em;
+            border: 2px solid black; /* Border to match the theme */
+        }
+
+        .back-btn:hover {
+            opacity: 0.9;
+            background-color: #f2f2f2; /* Lighter gray on hover */
+        }
+
+        .item-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .item {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            width: 200px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .item img {
+            width: 180px;
+            height: 250px;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .item img:hover {
+            transform: scale(1.1);
+        }
+
+        .item h2 {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .item p {
+            font-size: 16px;
+            color: #333;
+        }
+
+        .item button {
+            background-color: #1e90ff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .item button:hover {
+            background-color: #4682b4;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Boys Clothing and Footwear Collection</h1>
+        <a href="fashion 17.html" class="back-btn">Back</a> 
+        <p>Explore our collection of stylish boys' shirts and footwear</p>
+    </header>
+
+    <div class="item-container">
+        <!-- Boys' Shirts -->
+        <div class="item">
+            <img src="kid 1.jpg" alt="Kid Shirt 1">
+            <h2>Shirt 1</h2>
+            <p>₹700</p>
+            <button onclick="addToCart('Shirt 1', 700, 'kid 1.jpg')">Add to Cart</button>
+            <button onclick="addToWishlist('Shirt 1', 700, 'kid 1.jpg')">Add to Wishlist</button>
+        </div>
+        <div class="item">
+            <img src="kid 2.jpg" alt="Kid Shirt 2">
+            <h2>Shirt 2</h2>
+            <p>₹750</p>
+            <button onclick="addToCart('Shirt 2', 750, 'kid 2.jpg')">Add to Cart</button>
+            <button onclick="addToWishlist('Shirt 2', 750, 'kid 2.jpg')">Add to Wishlist</button>
+        </div>
+        <div class="item">
+            <img src="kid 3.jpg" alt="Kid Shirt 3">
+            <h2>Shirt 3</h2>
+            <p>₹800</p>
+            <button onclick="addToCart('Shirt 3', 800, 'kid 3.jpg')">Add to Cart</button>
+            <button onclick="addToWishlist('Shirt 3', 800, 'kid 3.jpg')">Add to Wishlist</button>
+        </div>
+        <div class="item">
+            <img src="kid 4.jpg" alt="Kid Shirt 4">
+            <h2>Shirt 4</h2>
+            <p>₹850</p>
+            <button onclick="addToCart('Shirt 4', 850, 'kid 4.jpg')">Add to Cart</button>
+            <button onclick="addToWishlist('Shirt 4', 850, 'kid 4.jpg')">Add to Wishlist</button>
+        </div>
+        <div class="item">
+            <img src="kid 5.jpg" alt="Kid Shirt 5">
+            <h2>Shirt 5</h2>
+            <p>₹900</p>
+            <button onclick="addToCart('Shirt 5', 900, 'kid 5.jpg')">Add to Cart</button>
+            <button onclick="addToWishlist('Shirt 5', 900, 'kid 5.jpg')">Add to Wishlist</button>
+        </div>
+        <div class="item">
+            <img src="kid 6.jpg" alt="Kid Shirt 6">
+            <h2>Shirt 6</h2>
+            <p>₹950</p>
+            <button onclick="addToCart('Shirt 6', 950, 'kid 6.jpg')">Add to Cart</button>
+            <button onclick="addToWishlist('Shirt 6', 950, 'kid 6.jpg')">Add to Wishlist</button>
+        </div>
+
+        <!-- Boys' Footwear -->
+        <div class="item">
+            <img src="foots 1.jpg" alt="Footwear 1">
+            <h2>Footwear 1</h2>
+            <p>₹500</p>
+            <button onclick="addToCart('Footwear 1', 500, 'foots 1.jpg')">Add to Cart</button>
+            <button onclick="addToWishlist('Footwear 1', 500, 'foots 1.jpg')">Add to Wishlist</button>
+        </div>
+        <div class="item">
+            <img src="foots 2.jpg" alt="Footwear 2">
+            <h2>Footwear 2</h2>
+            <p>₹550</p>
+            <button onclick="addToCart('Footwear 2', 550, 'foots 2.jpg')">Add to Cart</button>
+            <button onclick="addToWishlist('Footwear 2', 550, 'foots 2.jpg')">Add to Wishlist</button>
+        </div>
+        <div class="item">
+            <img src="foots 3.jpg" alt="Footwear 3">
+            <h2>Footwear 3</h2>
+            <p>₹600</p>
+            <button onclick="addToCart('Footwear 3', 600, 'foots 3.jpg')">Add to Cart</button>
+            <button onclick="addToWishlist('Footwear 3', 600, 'foots 3.jpg')">Add to Wishlist</button>
+        </div>
+        <div class="item">
+            <img src="foots 4.jpg" alt="Footwear 4">
+            <h2>Footwear 4</h2>
+            <p>₹650</p>
+            <button onclick="addToCart('Footwear 4', 650, 'foots 4.jpg')">Add to Cart</button>
+            <button onclick="addToWishlist('Footwear 4', 650, 'foots 4.jpg')">Add to Wishlist</button>
+        </div>
+        <div class="item">
+            <img src="foots 5.jpg" alt="Footwear 5">
+            <h2>Footwear 5</h2>
+            <p>₹700</p>
+            <button onclick="addToCart('Footwear 5', 700, 'foots 5.jpg')">Add to Cart</button>
+            <button onclick="addToWishlist('Footwear 5', 700, 'foots 5.jpg')">Add to Wishlist</button>
+        </div>
+        <div class="item">
+            <img src="foots 6.jpg" alt="Footwear 6">
+            <h2>Footwear 6</h2>
+            <p>₹750</p>
+            <button onclick="addToCart('Footwear 6', 750, 'foots 6.jpg')">Add to Cart</button>
+            <button onclick="addToWishlist('Footwear 6', 750, 'foots 6.jpg')">Add to Wishlist</button>
+        </div>
+    </div>
+
+    <script>
+        function addToCart(name, price, image) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const item = { name, price, image, quantity: 1 };
+
+            const existingItemIndex = cart.findIndex(i => i.name === name);
+            if (existingItemIndex > -1) {
+                cart[existingItemIndex].quantity += 1;
+            } else {
+                cart.push(item);
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(name + " has been added to your cart.");
+        }
+
+        function addToWishlist(name, price, image) {
+            const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            const item = { name, price, image };
+
+            const existingItemIndex = wishlist.findIndex(i => i.name === name);
+            if (existingItemIndex === -1) {
+                wishlist.push(item);
+                localStorage.setItem('wishlist', JSON.stringify(wishlist));
+                alert(`${name} has been added to the wishlist.`);
+            } else {
+                alert(`${name} is already in the wishlist.`);
+            }
+
+        }
+    </script>
+</body>
+</html>

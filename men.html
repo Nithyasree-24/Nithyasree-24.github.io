@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prasanna's Fashions</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(45deg, pink, hotpink);
+            animation: backgroundAnimation 5s ease infinite;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        @keyframes backgroundAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header {
+            margin-bottom: 50px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 10px;
+            border: 2px solid white;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            transition: transform 0.3s ease;
+            background-color: #ff69b4;
+        }
+
+        nav a:hover {
+            transform: scale(1.2);
+        }
+
+        nav a i {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Prasanna's Fashions</h1>
+    </header>
+
+    <nav>
+        <!-- Linking Home button to home.html -->
+        <a href="home.html">
+            <i class="fas fa-home"></i>
+            Home
+        </a>
+        <a href="#" onclick="navigate('Wishlist')">
+            <i class="fas fa-heart"></i>
+            Wishlist
+        </a>
+        <a href="#" onclick="navigate('Cart')">
+            <i class="fas fa-shopping-cart"></i>
+            Cart
+        </a>
+        <a href="#" onclick="navigate('Your Orders')">
+            <i class="fas fa-box"></i>
+            Orders
+        </a>
+    </nav>
+
+    <footer>
+        <p>&copy; 2024 Prasanna's Fashions. All rights reserved.</p>
+    </footer>
+
+    <!-- FontAwesome icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>

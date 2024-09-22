@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeans - Prasanna's Fashions</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url('jeans background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: black;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        header {
+            margin-bottom: 30px;
+        }
+        .back-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background-color: white;
+            color: #ff69b4;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1em;
+            border: 2px solid black; /* Border to match the theme */
+        }
+
+        .back-btn:hover {
+            opacity: 0.9;
+            background-color: #f2f2f2; /* Lighter gray on hover */
+        }
+
+        .jeans-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .jeans {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            width: 200px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .jeans:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .jeans img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .jeans img:hover {
+            transform: scale(1.1);
+        }
+
+        .jeans h2 {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .jeans p {
+            font-size: 16px;
+            color: #333;
+        }
+
+        .jeans button {
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .jeans button:hover {
+            background-color: #ff1494;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Jeans Collection</h1>
+        <a href="fashion 15.html" class="back-btn">Back</a> 
+        <p>Explore our range of stylish jeans</p>
+    </header>
+
+    <div class="jeans-container">
+        <div class="jeans">
+            <img src="jeans 1.jpg" alt="Blue jeans">
+            <h2>Blue jeans</h2>
+            <p>₹1,800</p>
+            <button onclick="addToCart('Blue jeans', 'jeans 1.jpg', 1800)">Add to Cart</button>
+            <button onclick="addToWishlist('Blue jeans', 'jeans 1.jpg', 1800)">Add to Wishlist</button>
+        </div>
+        <div class="jeans">
+            <img src="jeans 2.jpg" alt="Beige jeans">
+            <h2>Beige jeans</h2>
+            <p>₹2,000</p>
+            <button onclick="addToCart('Beige jeans', 'jeans 2.jpg', 2000)">Add to Cart</button>
+            <button onclick="addToWishlist('Beige jeans', 'jeans 2.jpg', 2000)">Add to Wishlist</button>
+        </div>
+        <div class="jeans">
+            <img src="jeans 3.jpg" alt="Green jeans">
+            <h2>Green jeans</h2>
+            <p>₹2,200</p>
+            <button onclick="addToCart('Green jeans', 'jeans 3.jpg', 2200)">Add to Cart</button>
+            <button onclick="addToWishlist('Green jeans', 'jeans 3.jpg', 2200)">Add to Wishlist</button>
+        </div>
+        <div class="jeans">
+            <img src="jeans 4.jpg" alt="Brown trouser">
+            <h2>Brown trouser</h2>
+            <p>₹1,900</p>
+            <button onclick="addToCart('Brown trouser', 'jeans 4.jpg', 1900)">Add to Cart</button>
+            <button onclick="addToWishlist('Brown trouser', 'jeans 4.jpg', 1900)">Add to Wishlist</button>
+        </div>
+        <div class="jeans">
+            <img src="jeans 5.jpg" alt="Brown cargo">
+            <h2>Brown cargo</h2>
+            <p>₹2,100</p>
+            <button onclick="addToCart('Brown cargo', 'jeans 5.jpg', 2100)">Add to Cart</button>
+            <button onclick="addToWishlist('Brown cargo', 'jeans 5.jpg', 2100)">Add to Wishlist</button>
+        </div>
+        <div class="jeans">
+            <img src="jeans 6.jpg" alt="White jeans">
+            <h2>White jeans</h2>
+            <p>₹2,300</p>
+            <button onclick="addToCart('White jeans', 'jeans 6.jpg', 2300)">Add to Cart</button>
+            <button onclick="addToWishlist('White jeans', 'jeans 6.jpg', 2300)">Add to Wishlist</button>
+        </div>
+    </div>
+
+    <script>
+        function addToCart(name, image, price) {
+            let cart = localStorage.getItem('cart');
+            cart = cart ? JSON.parse(cart) : [];
+
+            const existingItem = cart.find(item => item.name === name);
+
+            if (existingItem) {
+                existingItem.quantity++; // Increment quantity if item already in cart
+            } else {
+                cart.push({ name, image, price, quantity: 1 });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(name + " has been added to your cart.");
+        }
+
+        function addToWishlist(name, image, price) {
+            let wishlist = localStorage.getItem('wishlist');
+            wishlist = wishlist ? JSON.parse(wishlist) : [];
+
+            const existingItem = wishlist.find(item => item.name === name);
+
+            if (!existingItem) {
+                wishlist.push({ name, image, price });
+                localStorage.setItem('wishlist', JSON.stringify(wishlist));
+                alert(name + " is added to your wishlist.");
+
+            } else {
+                alert(name + ' is already in your wishlist.');
+            }
+        }
+    </script>
+</body>
+</html>

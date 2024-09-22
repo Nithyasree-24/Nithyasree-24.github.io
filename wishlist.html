@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist - Prasanna's Fashions</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url('wishlist background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: black;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        header {
+            margin-bottom: 30px;
+        }
+        .back-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background-color: white;
+            color: black;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1em;
+            border: 2px solid black;
+        }
+
+        .back-btn:hover {
+            opacity: 0.9;
+            background-color: #f2f2f2;
+        }
+
+        .wishlist-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .wishlist-item {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            width: 200px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .wishlist-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .wishlist-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .wishlist-item h2 {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .wishlist-item p {
+            font-size: 16px;
+            color: #333;
+        }
+
+        .wishlist-item button {
+            background-color: #1e90ff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+        }
+
+        .wishlist-item button:hover {
+            background-color: #4682b4;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Your Wishlist</h1>
+        <a href="fashion 11.html" class="back-btn">Home</a>
+        <p>Items you have added to your wishlist</p>
+    </header>
+
+    <div class="wishlist-container" id="wishlistContainer">
+        <!-- Wishlist items will be inserted here -->
+    </div>
+
+    <script>
+        function loadWishlist() {
+            const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            const wishlistContainer = document.getElementById('wishlistContainer');
+            wishlistContainer.innerHTML = '';
+
+            if (wishlist.length === 0) {
+                wishlistContainer.innerHTML = '<p>Your wishlist is empty.</p>';
+            } else {
+                wishlist.forEach(item => {
+                    const wishlistItem = document.createElement('div');
+                    wishlistItem.classList.add('wishlist-item');
+
+                    // Use a fallback image if the item.image is undefined
+                    const itemImage = item.image ? item.image : 'default-image.jpg'; // Replace 'default-image.jpg' with your fallback image
+
+                    wishlistItem.innerHTML = `
+                        <img src="${itemImage}" alt="${item.name}">
+                        <h2>${item.name}</h2>
+                        <p>₹${item.price}</p>
+                        <button onclick="addToCart('${item.name}', '${itemImage}', ${item.price})">Add to Cart</button>
+                        <button onclick="removeFromWishlist('${item.name}')">Remove</button>
+                    `;
+                    wishlistContainer.appendChild(wishlistItem);
+                });
+            }
+        }
+
+        function addToCart(name, image, price) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const existingItem = cart.find(item => item.name === name);
+
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ name, image, price, quantity: 1 });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            window.location.href = "cart.html"; // Redirect to cart page
+        }
+
+        function removeFromWishlist(name) {
+            let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            wishlist = wishlist.filter(item => item.name !== name);
+
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            loadWishlist(); // Reload the wishlist to reflect the changes
+        }
+
+        // Load the wishlist when the page loads
+        window.onload = loadWishlist;
+    </script>
+</body>
+</html>

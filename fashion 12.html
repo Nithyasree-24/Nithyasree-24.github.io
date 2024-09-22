@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prasanna's Fashions - Home</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(45deg, pink, hotpink);
+            animation: backgroundAnimation 5s ease infinite;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        @keyframes backgroundAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header {
+            margin-bottom: 50px;
+        }
+        .back-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background-color: #ff69b4;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1em;
+            border: 2px solid white; /* Border to match the theme */
+        }
+
+        .back-btn:hover {
+            opacity: 0.9;
+            background-color: #ff1494; /* Lighter gray on hover */
+        }
+
+        .category-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .category {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 10px;
+            border: 2px solid white;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            transition: transform 0.3s ease;
+            background-color: #ff69b4;
+        }
+
+        .category:hover {
+            transform: scale(1.2);
+        }
+
+        .category i {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+    <script>
+        function navigateCategory(category) {
+            alert("Navigating to " + category + " category.");
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Home</h1>
+        <a href="fashion 11.html" class="back-btn">Back</a>
+        <p>Select a Category</p>
+    </header>
+
+    <div class="category-container">
+        <a href="fashion 14.html" class="category">
+            <i class="fas fa-male"></i>
+            Men
+        </a>
+        <a href="fashion 15.html" class="category">
+            <i class="fas fa-female"></i>
+            Women
+        </a>
+        <a href="fashion 17.html" class="category">
+            <i class="fas fa-child"></i>
+            Kids
+        </a>
+    </div>
+    <!-- FontAwesome icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>

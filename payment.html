@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - BlossomGifts</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            font-family: Arial, sans-serif;
+            height: 100%;
+            background: url('orders background.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .header {
+            background-color: black; /* Brown */
+            color: white;
+            padding: 15px;
+            text-align: center;
+            width: 100%;
+            position: relative;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .back-btn {
+            position: absolute;
+            left: 20px;
+            top: 15px;
+            background-color: white;
+            color: black; /* Brown */
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1em;
+            border: 2px solid black; /* Border to match the theme */
+        }
+
+        .back-btn:hover {
+            opacity: 0.9;
+            background-color: #f2f2f2; /* Lighter gray on hover */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-summary {
+            margin-bottom: 20px;
+        }
+
+        .order-summary h2 {
+            margin-bottom: 10px;
+            font-size: 1.5em;
+            color: #8B4513; /* Brown */
+        }
+
+        .order-summary .cart-item {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+        }
+
+        .order-summary img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-right: 15px;
+        }
+
+        .order-summary .details {
+            flex-grow: 1;
+        }
+
+        .order-summary .name {
+            font-size: 1.2em;
+            color: #8B4513; /* Brown */
+        }
+
+        .order-summary .price {
+            font-size: 1.1em;
+            color: #8B4513; /* Brown */
+        }
+
+        .order-summary .quantity {
+            font-size: 1em;
+            color: #555;
+        }
+
+        .payment-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .payment-form input, .payment-form select {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+
+        .payment-form input:focus, .payment-form select:focus {
+            border-color: #8B4513; /* Brown */
+            outline: none;
+        }
+
+        .payment-form button {
+            background-color: #ff1494; /* Brown */
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .payment-form button:hover {
+            background-color: #ff69b4; /* Darker Brown */
+        }
+
+        .upi-options, .qr-code {
+            display: none;
+            margin-bottom: 15px;
+        }
+
+        .upi-options input {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="cart.html" class="back-btn">Back to Cart</a>
+        <h1>Payment</h1>
+    </div>
+
+    <div class="container">
+        <div class="order-summary">
+            <h2>Order Summary</h2>
+            <div id="orderItems"></div>
+            <p><strong>Total Amount:</strong> ₹<span id="totalAmount">0.00</span></p>
+        </div>
+
+        <form class="payment-form" id="paymentForm">
+            <input type="text" id="name" name="name" placeholder="Full Name (8-10 characters)" minlength="8" maxlength="10" required>
+            <input type="email" id="email" name="email" placeholder="Email Address" required>
+            <input type="text" id="mobile" name="mobile" placeholder="Mobile Number" required>
+            <textarea id="address" name="address" placeholder="Address" rows="4" required></textarea>
+            
+            <select id="paymentMethod" name="paymentMethod" required>
+                <option value="" disabled selected>Select Payment Method</option>
+                <option value="creditCard">Credit Card</option>
+                <option value="upi">UPI</option>
+                <option value="cashOnDelivery">Cash on Delivery</option>
+            </select>
+
+            <div id="upiOptions" class="upi-options">
+                <select id="upiProvider" name="upiProvider">
+                    <option value="" disabled selected>Select UPI Provider</option>
+                    <option value="phonepe">PhonePe</option>
+                    <option value="googlePay">Google Pay</option>
+                    <option value="scanner">Scanner</option>
+                </select>
+                <input type="text" id="upiId" name="upiId" placeholder="Enter UPI ID" style="display: none;">
+                <div id="qrCode" class="qr-code"></div>
+            </div>
+
+            <input type="text" id="cardNumber" name="cardNumber" placeholder="Credit Card Number" style="display: none;">
+            <input type="text" id="cardExpiry" name="cardExpiry" placeholder="Expiry Date (MM/YY)" style="display: none;">
+            <input type="text" id="cardCVV" name="cardCVV" placeholder="CVV" style="display: none;">
+
+            <button type="submit">Complete Payment</button>
+        </form>
+    </div>
+
+    <script>
+        function loadOrderSummary() {
+            const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+            let totalAmount = 0; // Initialize total amount
+
+            const orderItemsContainer = document.getElementById('orderItems');
+            orderItemsContainer.innerHTML = ''; // Clear existing items
+            
+            cartItems.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('cart-item');
+                const itemTotal = (item.price * item.quantity).toFixed(2);
+                
+                // Add the item total to the total amount
+                totalAmount += parseFloat(itemTotal);
+
+                itemDiv.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="details">
+                        <p class="name">${item.name}</p>
+                        <p class="price">₹${item.price.toFixed(2)}</p>
+                        <p class="quantity">Quantity: ${item.quantity}</p>
+                        <p class="total">Total: ₹${itemTotal}</p>
+                    </div>
+                `;
+                orderItemsContainer.appendChild(itemDiv);
+            });
+
+            // Update the total amount on the page
+            document.getElementById('totalAmount').innerText = totalAmount.toFixed(2);
+
+            // Optionally, store the updated total amount in localStorage for later use
+            localStorage.setItem('totalAmount', totalAmount.toFixed(2));
+        }
+
+        function handlePaymentMethodChange(event) {
+            const paymentMethod = event.target.value;
+            const upiOptions = document.getElementById('upiOptions');
+            const cardInputs = document.querySelectorAll('#cardNumber, #cardExpiry, #cardCVV');
+            const upiIdInput = document.getElementById('upiId');
+            const qrCodeContainer = document.getElementById('qrCode');
+
+            cardInputs.forEach(input => input.style.display = 'none');
+            upiIdInput.style.display = 'none';
+            upiOptions.style.display = 'none';
+            qrCodeContainer.style.display = 'none';
+
+            if (paymentMethod === 'creditCard') {
+                cardInputs.forEach(input => input.style.display = 'block');
+            } else if (paymentMethod === 'upi') {
+                upiOptions.style.display = 'block';
+            } else if (paymentMethod === 'cashOnDelivery') {
+                // No additional fields required
+            }
+        }
+
+        function handleUpiProviderChange(event) {
+            const upiProvider = event.target.value;
+            const upiIdInput = document.getElementById('upiId');
+            const qrCodeContainer = document.getElementById('qrCode');
+
+            upiIdInput.style.display = upiProvider !== 'scanner' ? 'block' : 'none';
+            qrCodeContainer.style.display = upiProvider === 'scanner' ? 'block' : 'none';
+            if (upiProvider === 'scanner') {
+                // Navigate to qr-code.html when "Scanner" is selected
+                window.location.href = 'scanner.html';
+            }
+        }
+
+        document.getElementById('paymentMethod').addEventListener('change', handlePaymentMethodChange);
+        document.getElementById('upiProvider').addEventListener('change', handleUpiProviderChange);
+        document.getElementById('paymentForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Check if all fields are filled
+            const allFieldsFilled = [...this.elements].every(input => input.checkValidity());
+            if (allFieldsFilled) {
+                // Redirect to orders.html
+                window.location.href = 'orders.html';
+            } else {
+                alert('Please fill in all fields correctly.');
+            }
+        });
+
+        // Initialize order summary on page load
+        loadOrderSummary();
+    </script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethnic Wear - Prasanna's Fashions</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url('ethnic background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: black;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        header {
+            margin-bottom: 30px;
+        }
+        .back-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background-color: white;
+            color: #ff69b4;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1em;
+            border: 2px solid black; /* Border to match the theme */
+        }
+
+        .back-btn:hover {
+            opacity: 0.9;
+            background-color: #f2f2f2; /* Lighter gray on hover */
+        }
+
+
+        .lehanga-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .lehanga {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            width: 200px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .lehanga:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .lehanga img {
+            width: 180px;
+            height: 240px;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .lehanga img:hover {
+            transform: scale(1.1);
+        }
+
+        .lehanga h2 {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .lehanga p {
+            font-size: 16px;
+            color: #333;
+        }
+
+        .lehanga button {
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .lehanga button:hover {
+            background-color: #ff1494;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ethnic Wear Collection</h1>
+        <a href="fashion 15.html" class="back-btn">Back</a> 
+        <p>Explore our range of beautiful lehengas</p>
+    </header>
+
+    <div class="lehanga-container">
+        <div class="lehanga">
+            <img src="lehanga 1.jpg" alt="Blue lehenga">
+            <h2>Blue lehenga</h2>
+            <p>₹3,500</p>
+            <button onclick="addToCart('Blue lehenga', 'lehanga 1.jpg', 3500)">Add to Cart</button>
+            <button onclick="addToWishlist('Blue lehenga', 'lehanga 1.jpg', 3500)">Add to Wishlist</button>
+        </div>
+        <div class="lehanga">
+            <img src="lehanga 2.jpg" alt="Red lehenga">
+            <h2>Red lehenga</h2>
+            <p>₹4,200</p>
+            <button onclick="addToCart('Red lehenga', 'lehanga 2.jpg', 4200)">Add to Cart</button>
+            <button onclick="addToWishlist('Red lehenga', 'lehanga 2.jpg', 4200)">Add to Wishlist</button>
+        </div>
+        <div class="lehanga">
+            <img src="lehanga 3.jpg" alt="Lavender lehenga">
+            <h2>Lavender lehenga</h2>
+            <p>₹3,800</p>
+            <button onclick="addToCart('Lavender lehenga', 'lehanga 3.jpg', 3800)">Add to Cart</button>
+            <button onclick="addToWishlist('Lavender lehenga', 'lehanga 3.jpg', 3800)">Add to Wishlist</button>
+        </div>
+        <div class="lehanga">
+            <img src="lehanga 4.jpg" alt="Beige lehenga">
+            <h2>Beige lehenga</h2>
+            <p>₹5,000</p>
+            <button onclick="addToCart('Beige lehenga', 'lehanga 4.jpg', 5000)">Add to Cart</button>
+            <button onclick="addToWishlist('Beige lehenga', 'lehanga 4.jpg', 5000)">Add to Wishlist</button>
+        </div>
+        <div class="lehanga">
+            <img src="lehanga 5.jpg" alt="Pink lehenga">
+            <h2>Pink lehenga</h2>
+            <p>₹4,500</p>
+            <button onclick="addToCart('Pink lehenga', 'lehanga 5.jpg', 4500)">Add to Cart</button>
+            <button onclick="addToWishlist('Pink lehenga', 'lehanga 5.jpg', 4500)">Add to Wishlist</button>
+        </div>
+        <div class="lehanga">
+            <img src="lehanga 6.jpg" alt="Yellow lehenga">
+            <h2>Yellow lehenga</h2>
+            <p>₹3,900</p>
+            <button onclick="addToCart('Yellow lehenga', 'lehanga 6.jpg', 3900)">Add to Cart</button>
+            <button onclick="addToWishlist('Yellow lehenga', 'lehanga 6.jpg', 3900)">Add to Wishlist</button>
+        </div>
+    </div>
+
+    <script>
+        function addToCart(name, image, price) {
+            let cart = localStorage.getItem('cart');
+            cart = cart ? JSON.parse(cart) : [];
+
+            const existingItem = cart.find(item => item.name === name);
+
+            if (existingItem) {
+                existingItem.quantity++; // Increment quantity if item already in cart
+            } else {
+                cart.push({ name, image, price, quantity: 1 });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(name + " has been added to your cart.");
+
+        }
+
+        function addToWishlist(name, image, price) {
+            let wishlist = localStorage.getItem('wishlist');
+            wishlist = wishlist ? JSON.parse(wishlist) : [];
+
+            const existingItem = wishlist.find(item => item.name === name);
+
+            if (!existingItem) {
+                wishlist.push({ name, image, price });
+                localStorage.setItem('wishlist', JSON.stringify(wishlist));
+                alert(name + " is added to your wishlist.");
+
+            }else{
+                alert(name + " is already in your wishlist.");
+            }
+          }
+    </script>
+</body>
+</html>

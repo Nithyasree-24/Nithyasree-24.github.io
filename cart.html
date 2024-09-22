@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Prasanna's Fashions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            font-family: Arial, sans-serif;
+            height: 100%;
+            background-image:url('cart background.jpg');
+            background-size:cover;
+            background-position: center;
+        }
+
+        .header {
+            background-color: black;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            width: 100%;
+        }
+        .back-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background-color: white;
+            color: black;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1em;
+            border: 2px solid black; /* Border to match the theme */
+        }
+
+        .back-btn:hover {
+            opacity: 0.9;
+            background-color: #f2f2f2; /* Lighter gray on hover */
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+        }
+
+        .cart-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-right: 15px;
+        }
+
+        .cart-item .details {
+            flex-grow: 1;
+        }
+
+        .cart-item .name {
+            font-size: 1.2em;
+            color: #8B4513;
+        }
+
+        .cart-item .price {
+            font-size: 1.1em;
+            color: #8B4513;
+        }
+
+        .cart-item .quantity {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            margin: 0 15px;
+        }
+
+        .quantity-input {
+            width: 60px;
+            height: 30px;
+            font-size: 1em;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .cart-item .remove-btn {
+            background-color: #ff1492;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+
+        .cart-item .remove-btn:hover {
+            opacity: 0.9;
+        }
+
+        .total, .checkout-all {
+            margin-top: 20px;
+            text-align: right;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #ff1493;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1em;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Shopping Cart</h1>
+        <a href="fashion 11.html" class="back-btn">Home</a>
+    </div>
+
+    <div class="container">
+        <div id="cartContainer">
+            <!-- Cart items will be inserted here -->
+        </div>
+
+        <div class="total">
+            Total: ₹<span id="totalAmount">0.00</span>
+        </div>
+
+        <div class="checkout-all">
+            <a href="payment.html" class="btn">Checkout All Items</a>
+        </div>
+    </div>
+
+    <script>
+        function loadCart() {
+            const savedCart = localStorage.getItem('cart');
+            let cartItems = savedCart ? JSON.parse(savedCart) : [];
+            updateCart(cartItems);
+        }
+
+        function updateCart(cartItems) {
+            const cartContainer = document.getElementById('cartContainer');
+            cartContainer.innerHTML = ''; // Clear existing content
+            let totalAmount = 0;
+
+            cartItems.forEach((item, index) => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'cart-item';
+                itemDiv.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="details">
+                        <div class="name">${item.name}</div>
+                        <div class="price">₹${item.price}</div>
+                    </div>
+                    <div class="quantity">
+                        <input type="number" value="${item.quantity}" min="1" class="quantity-input" id="quantity-${index}" onchange="updateQuantity(${index})">
+                        <button class="remove-btn" onclick="removeFromCart(${index})">Remove</button>
+                    </div>
+                `;
+                cartContainer.appendChild(itemDiv);
+                totalAmount += item.price * item.quantity;
+            });
+
+            document.getElementById('totalAmount').textContent = totalAmount.toFixed(2);
+        }
+
+        function removeFromCart(index) {
+            const savedCart = localStorage.getItem('cart');
+            let cartItems = savedCart ? JSON.parse(savedCart) : [];
+            cartItems.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cartItems));
+            updateCart(cartItems);
+        }
+
+        function updateQuantity(index) {
+            const quantityInput = document.getElementById(`quantity-${index}`);
+            const newQuantity = parseInt(quantityInput.value, 10);
+            const savedCart = localStorage.getItem('cart');
+            let cartItems = savedCart ? JSON.parse(savedCart) : [];
+
+            if (newQuantity > 0) {
+                cartItems[index].quantity = newQuantity;
+                localStorage.setItem('cart', JSON.stringify(cartItems));
+                updateCart(cartItems);
+            }
+        }
+
+        // Initialize cart on page load
+        loadCart();
+    </script>
+</body>
+</html>

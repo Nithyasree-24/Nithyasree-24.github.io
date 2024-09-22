@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prasanna's Fashions - Men</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url('mens background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        header {
+            margin-bottom: 50px;
+            padding: 20px;
+            background-color: white;
+            color: black;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .back-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background-color: white;
+            color: black;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1em;
+            border: 2px solid black; /* Border to match the theme */
+        }
+
+        .back-btn:hover {
+            opacity: 0.9;
+            background-color: #f2f2f2; /* Lighter gray on hover */
+        }
+
+        
+
+        .category-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .category {
+            text-decoration: none;
+            color: black;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 10px;
+            border: 2px solid black;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            transition: transform 0.3s ease;
+            background-color: white;
+        }
+
+        .category:hover {
+            transform: scale(1.2);
+        }
+
+        .category i {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+    <script>
+        function navigateCategory(category) {
+            alert("Navigating to " + category + " category.");
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Men's Fashion</h1>
+        <a href="fashion 12.html" class="back-btn">Back</a> 
+        <p>Select a Category</p>
+    </header>
+
+    <div class="category-container">
+        <a href="shirts.html" class="category">
+            <i class="fas fa-tshirt"></i>
+            Shirts
+        </a>
+        <a href="tshirts.html" class="category">
+            <i class="fas fa-tshirt"></i>
+            T-shirts
+        </a>
+        <a href="bottomwear.html" class="category">
+            <i class="fas fa-jeans"></i>
+            Bottomwear
+        </a>
+        <a href="footwears.html" class="category">
+            <i class="fas fa-shoe-prints"></i>
+            Footwear
+        </a>
+    </div>
+    <!-- FontAwesome icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>

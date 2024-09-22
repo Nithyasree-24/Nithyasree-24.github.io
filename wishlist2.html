@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Wishlist</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('your-background-image.jpg');
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            color: #666;
+        }
+        .wishlist-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .wishlist-item {
+            width: 200px;
+            border: 1px solid #ccc;
+            margin: 10px;
+            padding: 10px;
+            background-color: white;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .wishlist-item img {
+            width: 100px;
+            height: 100px;
+        }
+        .wishlist-item h3 {
+            font-size: 18px;
+            color: #333;
+        }
+        .wishlist-item p {
+            font-size: 16px;
+            color: #555;
+        }
+        button {
+            background-color: #008CBA;
+            color: white;
+            padding: 10px;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #005f6b;
+        }
+        .empty-wishlist {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 24px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Your Wishlist</h1>
+        <p>Items you have added to your wishlist</p>
+
+        <div class="wishlist-container" id="wishlist-container">
+            <!-- Wishlist items will be dynamically inserted here -->
+        </div>
+
+        <div class="empty-wishlist" id="empty-wishlist">
+            Your wishlist is empty.
+        </div>
+    </div>
+
+    <script>
+        // Clear any previously added items in the wishlist to start fresh
+        localStorage.removeItem('wishlist');
+        
+        // Ensure wishlist is empty initially
+        let wishlistItems = [];
+
+        const wishlistContainer = document.getElementById('wishlist-container');
+        const emptyWishlistMessage = document.getElementById('empty-wishlist');
+
+        // Function to render wishlist items
+        function renderWishlist() {
+            wishlistContainer.innerHTML = ''; // Clear existing items
+
+            if (wishlistItems.length === 0) {
+                // Display empty wishlist message
+                wishlistContainer.style.display = 'none';
+                emptyWishlistMessage.style.display = 'block';
+            } else {
+                // Hide empty message and display wishlist items
+                emptyWishlistMessage.style.display = 'none';
+                wishlistContainer.style.display = 'flex';
+
+                wishlistItems.forEach(item => {
+                    // Create an HTML element for each wishlist item
+                    const itemDiv = document.createElement('div');
+                    itemDiv.classList.add('wishlist-item');
+                    itemDiv.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}">
+                        <h3>${item.name}</h3>
+                        <p>₹${item.price}</p>
+                        <button onclick="addToCart('${item.id}')">Add to Cart</button>
+                        <button onclick="removeFromWishlist('${item.id}')">Remove</button>
+                    `;
+                    wishlistContainer.appendChild(itemDiv);
+                });
+            }
+        }
+
+        // Function to add item to the cart and redirect to cart.html
+        function addToCart(itemId) {
+            // Find the item in the wishlist
+            const item = wishlistItems.find(i => i.id === itemId);
+            if (item) {
+                // Add the item to cart (you could store it in localStorage or send it to your backend)
+                let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+                cartItems.push(item);
+                localStorage.setItem('cart', JSON.stringify(cartItems));
+
+                // Remove the item from the wishlist after adding to cart
+                removeFromWishlist(itemId);
+
+                // Redirect to cart.html
+                window.location.href = 'cart.html';
+            }
+        }
+
+        // Function to remove item from wishlist
+        function removeFromWishlist(itemId) {
+            wishlistItems = wishlistItems.filter(i => i.id !== itemId);
+            localStorage.setItem('wishlist', JSON.stringify(wishlistItems));
+
+            // Re-render the wishlist
+            renderWishlist();
+        }
+
+        // Initial render
+        renderWishlist();
+    </script>
+
+</body>
+</html>

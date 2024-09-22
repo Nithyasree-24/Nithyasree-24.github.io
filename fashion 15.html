@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prasanna's Fashions - Women</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url('womens background.jpg') no-repeat center center fixed; /* Background image URL */
+            background-size: cover; /* Make sure the image covers the whole page */
+            color: white; /* Font color changed to white */
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        header {
+            margin-bottom: 50px;
+        }
+        .header-text-box {
+            background-color: white; /* Black background for the text box */
+            color: #ff69b4; /* White text color */
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            max-width: 90%;
+            text-align: center;
+        }
+        .back-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background-color: white;
+            color: #ff69b4;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1em;
+            border: 2px solid black; /* Border to match the theme */
+        }
+
+        .back-btn:hover {
+            opacity: 0.9;
+            background-color: #f2f2f2; /* Lighter gray on hover */
+        }
+
+
+        .category-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .category {
+            text-decoration: none;
+            color: #ff1494; /* Font color changed to white */
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 10px;
+            border: 2px solid white;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            transition: transform 0.3s ease;
+            background-color: white; /* Pink color */
+        }
+
+        .category:hover {
+            transform: scale(1.2);
+        }
+
+        .category i {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+    <script>
+        function navigateCategory(category) {
+            alert("Navigating to " + category + " category.");
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="header-text-box">
+            <h1>Women's Fashion</h1>
+            <a href="fashion 12.html" class="back-btn">Back</a> 
+            <p>Select a Category</p>
+        </div>
+    </header>
+
+    <div class="category-container">
+        <a href="ehnic.html" class="category">
+            <i class="fas fa-user-friends"></i>
+            Ethnic Wear
+        </a>
+        <a href="tops.html" class="category">
+            <i class="fas fa-tshirt"></i>
+            Tops
+        </a>
+        <a href="kurthis.html" class="category">
+            <i class="fas fa-user"></i>
+            Kurthis
+        </a>
+        <a href="jeans.html" class="category">
+            <i class="fas fa-jeans"></i>
+            Bottomwear
+        </a>
+        <a href="dresses.html" class="category">
+            <i class="fas fa-female"></i>
+            Dresses
+        </a>
+        <a href="slippers.html" class="category">
+            <i class="fas fa-shoe-prints"></i>
+            Footwear
+        </a>
+    </div>
+    <!-- FontAwesome icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
